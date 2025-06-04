@@ -42,16 +42,6 @@ export default function Navigation() {
                   : "text-gray-600 hover:text-blue-700 hover:bg-blue-50"
               }`}
             >
-              Home
-            </Link>
-            <Link
-              href="/products"
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
-                pathname === "/products"
-                  ? "bg-blue-100 text-blue-700"
-                  : "text-gray-600 hover:text-blue-700 hover:bg-blue-50"
-              }`}
-            >
               All Products
             </Link>
             <Link
