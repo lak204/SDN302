@@ -18,7 +18,9 @@ export default function SearchFilter() {
     setPriceValue(searchParams.get("price")?.toString() || "");
   }, [searchParams]);
 
-  const hasActiveFilters = !!(searchParams.get("query") || searchParams.get("price"));
+  const hasActiveFilters = !!(
+    searchParams.get("query") || searchParams.get("price")
+  );
 
   // Clear filter handler
   const handleClear = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -36,11 +38,7 @@ export default function SearchFilter() {
 
   return (
     <div className="w-full max-w-6xl px-4 mb-8 space-y-4">
-      <form
-        method="GET"
-        action={pathname}
-        className="flex flex-col gap-4"
-      >
+      <form method="GET" action={pathname} className="flex flex-col gap-4">
         <div className="flex gap-4 flex-wrap items-center">
           <div className="flex-1 min-w-[200px] relative">
             <input
@@ -49,7 +47,7 @@ export default function SearchFilter() {
               placeholder="Search products by name..."
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
-              className="w-full px-4 py-2 pl-10 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2 pl-10 border border-gray-200 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
             <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
           </div>
@@ -57,7 +55,7 @@ export default function SearchFilter() {
             name="price"
             onChange={(e) => setPriceValue(e.target.value)}
             value={priceValue}
-            className="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="px-4 py-2 border border-gray-200 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="">Price Range</option>
             <option value="0-50">$0 - $50</option>

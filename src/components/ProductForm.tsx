@@ -19,7 +19,9 @@ interface ProductFormProps {
 export default function ProductForm({ product, mode }: ProductFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [imagePreview, setImagePreview] = useState<string | null>(product?.image || null);
+  const [imagePreview, setImagePreview] = useState<string | null>(
+    product?.image || null
+  );
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -52,12 +54,16 @@ export default function ProductForm({ product, mode }: ProductFormProps) {
       }
 
       toast.success(
-        mode === "add" ? "Product added successfully" : "Product updated successfully"
+        mode === "add"
+          ? "Product added successfully"
+          : "Product updated successfully"
       );
       router.push("/");
       router.refresh();
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Something went wrong");
+      toast.error(
+        error instanceof Error ? error.message : "Something went wrong"
+      );
     } finally {
       setLoading(false);
     }
@@ -89,7 +95,7 @@ export default function ProductForm({ product, mode }: ProductFormProps) {
           id="name"
           required
           defaultValue={product?.name}
-          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-black focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       </div>
 
@@ -106,7 +112,7 @@ export default function ProductForm({ product, mode }: ProductFormProps) {
           required
           rows={4}
           defaultValue={product?.description}
-          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-black focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       </div>
 
@@ -129,7 +135,7 @@ export default function ProductForm({ product, mode }: ProductFormProps) {
             min="0"
             step="0.01"
             defaultValue={product?.price}
-            className="block w-full pl-7 rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="block w-full pl-7 rounded-md border border-gray-300 px-3 py-2 text-black focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
       </div>
@@ -148,7 +154,7 @@ export default function ProductForm({ product, mode }: ProductFormProps) {
             id="image"
             accept="image/*"
             onChange={handleImageChange}
-            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            className="block w-full text-sm text-black file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
           />
           {imagePreview && (
             <div className="relative w-20 h-20">
@@ -184,9 +190,13 @@ export default function ProductForm({ product, mode }: ProductFormProps) {
           disabled={loading}
           className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {loading ? "Saving..." : mode === "add" ? "Add Product" : "Update Product"}
+          {loading
+            ? "Saving..."
+            : mode === "add"
+            ? "Add Product"
+            : "Update Product"}
         </button>
       </div>
     </form>
   );
-} 
+}
