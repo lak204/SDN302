@@ -58,7 +58,9 @@ export default function RegisterPage() {
 
   return (
     <div className="max-w-md mx-auto my-10 p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-semibold text-center mb-6">Register</h1>
+      <h1 className="text-2xl font-semibold text-center mb-6 text-black">
+        Register
+      </h1>
       {error && (
         <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">{error}</div>
       )}
@@ -114,16 +116,17 @@ export default function RegisterPage() {
             className="w-full px-3 py-2 border border-gray-300 rounded text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
-        </div>{" "}        <button
+        </div>{" "}
+        <button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-white border border-blue-500 text-blue-500 py-2 px-4 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 font-medium"
+          className="w-full bg-white border border-blue-500  py-2 px-4 rounded text-black hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 font-medium"
         >
           {isLoading ? "Registering..." : "Register"}
         </button>
       </form>{" "}
       <div className="mt-4 text-center">
-        <p className="text-blue-500">
+        <p className="text-black">
           Already have an account?{" "}
           <Link
             href="/auth/login"
