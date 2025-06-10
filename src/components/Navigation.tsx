@@ -2,10 +2,17 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ShoppingCart, Plus, Search } from "lucide-react";
+import { ShoppingCart, Search, LogOut, User } from "lucide-react";
+import { useSession, signOut } from "next-auth/react";
 
 export default function Navigation() {
   const pathname = usePathname();
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === "authenticated";
+
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: "/" });
+  };
 
   return (
     <nav className="bg-white shadow-md fixed top-0 left-0 right-0 z-10">
@@ -24,10 +31,11 @@ export default function Navigation() {
 
           <div className="flex-1 max-w-2xl mx-8">
             <div className="relative">
+              {" "}
               <input
                 type="text"
                 placeholder="Search products..."
-                className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 rounded-lg border border-gray-200 text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
               <Search className="absolute right-3 top-2.5 h-5 w-5 text-gray-400" />
             </div>
@@ -44,13 +52,43 @@ export default function Navigation() {
             >
               All Products
             </Link>
-            <Link
-              href="/products/add"
-              className="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200 flex items-center space-x-2"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Add Product</span>
-            </Link>
+
+            {isAuthenticated ? (
+              <>
+                {" "}
+                <Link
+                  href="/profile"
+                  className="px-4 py-2 rounded-lg text-sm font-medium bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors duration-200 flex items-center space-x-2"
+                >
+                  <User className="w-4 h-4" />
+                  <span>
+                    {session.user?.name ? `${session.user.name}` : "My Profile"}
+                  </span>
+                </Link>{" "}
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-red-700 hover:bg-red-50 transition-colors duration-200 flex items-center space-x-2"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>Logout</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/auth/login"
+                  className="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/auth/register"
+                  className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200"
+                >
+                  Register
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+// filepath: d:\SDN\SDN302\src\app\products\[id]\page.tsx
 import { prisma } from "@/utils/prisma";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,12 +14,10 @@ interface ProductDetailPageProps {
   }>;
 }
 
-export default async function ProductDetailPage({
-  params,
-}: ProductDetailPageProps) {
+export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
   const { id } = await params;
   const session = await getServerSession(authOptions);
-
+  
   const product = await prisma.product.findUnique({
     where: {
       id,
@@ -28,16 +27,16 @@ export default async function ProductDetailPage({
         select: {
           id: true,
           name: true,
-          email: true,
-        },
-      },
-    },
+          email: true
+        }
+      }
+    }
   });
 
   if (!product) {
     notFound();
   }
-
+  
   // Check if current user is the owner of the product
   const isOwner = session?.user?.id === product.userId;
 
@@ -81,7 +80,7 @@ export default async function ProductDetailPage({
                   ${product.price.toFixed(2)}
                 </p>
                 <p className="text-gray-600 mb-6">{product.description}</p>
-
+                
                 {product.user && (
                   <p className="text-sm text-gray-500 mb-6">
                     Added by: {product.user.name || product.user.email}
@@ -99,10 +98,7 @@ export default async function ProductDetailPage({
                     Edit Product
                   </Link>
                   <div className="flex-1">
-                    <ProductDeleteButton
-                      productId={product.id}
-                      userId={product.userId}
-                    />{" "}
+                    <ProductDeleteButton productId={product.id} userId={product.userId} />
                   </div>
                 </div>
               )}

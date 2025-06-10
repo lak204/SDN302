@@ -5,13 +5,13 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/utils/auth";
 
 interface EditProductPageProps {
-  params: Promise<{
+  params: {
     id: string;
-  }>;
+  };
 }
 
 export default async function EditProductPage({ params }: EditProductPageProps) {
-  const { id } = await params;
+  const { id } = params;
   
   // Check if user is authenticated
   const session = await getServerSession(authOptions);
