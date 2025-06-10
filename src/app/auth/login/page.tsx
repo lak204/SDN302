@@ -43,11 +43,9 @@ export default function LoginPage() {
   return (
     <div className="max-w-md mx-auto my-10 p-6 bg-white rounded-lg shadow-md">
       <h1 className="text-2xl font-semibold text-center mb-6">Login</h1>
-
       {error && (
         <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">{error}</div>
       )}
-
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="email" className="block text-gray-700 mb-2">
@@ -62,7 +60,6 @@ export default function LoginPage() {
             required
           />
         </div>
-
         <div className="mb-6">
           <label htmlFor="password" className="block text-gray-700 mb-2">
             Password
@@ -75,14 +72,15 @@ export default function LoginPage() {
             className="w-full px-3 py-2 border border-gray-300 rounded text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
-        </div>        <button
+        </div>{" "}        <button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-blue-300"
+          className="w-full bg-white border border-blue-500 text-blue-500 py-2 px-4 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 font-medium"
         >
           {isLoading ? "Logging in..." : "Login"}
         </button>
-      </form>      <div className="mt-4 text-center">
+      </form>{" "}
+      <div className="mt-4 text-center">
         <p className="text-blue-500">
           Don&apos;t have an account?{" "}
           <Link
